@@ -1,0 +1,153 @@
+/* 모든 엘리먼트 초기화 */
+* {
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  box-sizing: border-box; /* 요소의 너비와 높이에 패딩과 테두리 포함 */
+}
+
+/* 전체 컨테이너에 대한 기본 스타일 */
+.home-container {
+  font-family: 'Arial', sans-serif; /* 전체 폰트 설정 */
+  color: #333; /* 기본 텍스트 색상 설정 */
+}
+
+/* 네비게이션 바 스타일링 */
+.navbar {
+  display: flex; /* 네비게이션 바를 플렉스 박스로 설정 */
+  justify-content: space-between; /* 로고와 링크를 양 끝으로 배치 */
+  align-items: center; /* 네비게이션 바 내의 아이템들을 세로로 중앙 정렬 */
+  padding: 20px 40px; /* 네비게이션 바의 안쪽 여백 설정 */
+  background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 아래쪽에 그림자를 주어 떠 있는 느낌을 추가 */
+}
+
+.navbar button{
+  background-color: #059761; /* 원하는 색상으로 변경 */
+  color: #fff; /* 버튼 텍스트 색상을 흰색으로 설정 */
+  border-radius: 5px; /* 버튼의 모서리를 둥글게 설정 */
+  padding: 10px 20px; /* 버튼의 내부 여백 설정 */
+}
+
+/* 로고 스타일링 */
+.logo {
+  font-size: 28px; /* 로고 텍스트의 크기 설정 */
+  font-weight: bold; /* 로고 텍스트의 굵기를 두껍게 설정 */
+  color: #fff; /* 로고 텍스트의 색상을 파란색으로 설정 */
+}
+
+/* 네비게이션 링크 스타일링 */
+.nav-links a {
+  margin: 0 15px; /* 링크 간의 간격 설정 */
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: #555; /* 링크 텍스트 색상 설정 */
+  font-size: 16px; /* 링크 텍스트 크기 설정 */
+}
+
+/* 네비게이션 링크 호버 스타일링 */
+.nav-links a:hover {
+  color: #19d27c; /* 링크에 마우스를 올렸을 때 색상 변경 */
+}
+
+/* map 섹션의 스타일링 */
+.map-section {
+  display: flex; /* 섹션을 플렉스 박스로 설정 */
+  align-items: center; /* 섹션 내의 아이템들을 세로로 중앙 정렬 */
+  justify-content: space-between; /* 텍스트와 이미지를 양 끝으로 배치 */
+  padding: 60px 40px; /* 섹션의 안쪽 여백 설정 */
+  background-color: #f5f5f5; /* 배경색을 연회색으로 설정 */
+}
+
+/* map 섹션의 텍스트 부분 스타일링 */
+.map-text {
+  max-width: 50%; /* 텍스트가 차지하는 최대 너비를 전체의 50%로 설정 */
+}
+
+/* get started button 스타일링 */
+.map-text button {
+  background-color: #059761;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+/* map 섹션의 제목 스타일링 */
+.map-text h1 {
+  font-size: 48px; /* 제목의 크기를 크게 설정 */
+  margin-bottom: 20px; /* 제목 아래쪽에 여백 추가 */
+  color: #059761; /* 제목 텍스트 색상을 녹색으로 설정 */
+}
+
+/* map 섹션의 문단 텍스트 스타일링 */
+.map-text p {
+  font-size: 18px; /* 문단 텍스트의 크기 설정 */
+  margin-bottom: 30px; /* 문단 텍스트 아래쪽에 여백 추가 */
+  color: #333; /* 문단 텍스트 색상 설정 */
+}
+
+/* map 섹션의 이미지 스타일링 */
+.map-image {
+  max-width: 45%; /* 이미지가 차지하는 최대 너비를 전체의 45%로 설정 */
+  border-radius: 10px; /* 이미지의 모서리를 둥글게 설정 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 이미지에 그림자를 주어 입체감을 추가 */
+}
+
+/* 기능 섹션 스타일링 */
+.features-section {
+  padding: 60px 40px; /* 섹션의 안쪽 여백 설정 */
+  text-align: center; /* 섹션 내의 텍스트를 중앙 정렬 */
+  color: #333333 ;
+}
+
+/* 기능 섹션의 제목 스타일링 */
+.features-section h2 {
+  font-size: 36px; /* 제목의 크기를 설정 */
+  margin-bottom: 40px; /* 제목 아래쪽에 여백 추가 */
+  color: #333333; /* 제목 텍스트 색상을 파란색으로 설정 */
+}
+
+/* 기능 섹션의 그리드 레이아웃 스타일링 */
+.features-grid {
+  display: flex; /* 그리드를 플렉스 박스로 설정 */
+  justify-content: space-around; /* 그리드 내의 아이템들을 균등하게 배치 */
+  flex-wrap: wrap; /* 그리드 내의 아이템들이 화면 크기에 따라 줄 바꿈 되도록 설정 */
+}
+
+/* 각 기능 아이템의 스타일링 */
+.feature-item {
+  width: 30%; /* 각 아이템의 너비를 전체의 30%로 설정 */
+  margin-bottom: 30px; /* 각 아이템의 아래쪽에 여백 추가 */
+  color: #333333;
+}
+
+/* 기능 아이템의 아이콘 스타일링 */
+.feature-item i {
+  font-size: 48px; /* 아이콘 크기를 설정 */
+  color: #059761; /* 아이콘 색상을 파란색으로 설정 */
+  margin-bottom: 20px; /* 아이콘 아래쪽에 여백 추가 */
+}
+
+/* 기능 아이템의 제목 스타일링 */
+.feature-item h3 {
+  font-size: 24px; /* 제목의 크기 설정 */
+  margin-bottom: 10px; /* 제목 아래쪽에 여백 추가 */
+}
+
+/* 기능 아이템의 문단 텍스트 스타일링 */
+.feature-item p {
+  font-size: 16px; /* 문단 텍스트의 크기 설정 */
+  color: #555; /* 문단 텍스트 색상 설정 */
+}
+
+/* 푸터 스타일링 */
+.footer {
+  padding: 20px 40px; /* 푸터의 안쪽 여백 설정 */
+  background-color: #ffffff; /* 푸터 배경색을 흰색으로 설정 */
+  text-align: center; /* 푸터 내의 텍스트를 중앙 정렬 */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 위쪽에 그림자를 주어 푸터를 떠 있는 느낌으로 추가 */
+}
+
+/* 푸터 텍스트 스타일링 */
+.footer p {
+  color: #777; /* 푸터 텍스트 색상 설정 */
+  font-size: 14px; /* 푸터 텍스트 크기 설정 */
+}

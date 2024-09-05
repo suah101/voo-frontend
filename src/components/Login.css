@@ -1,0 +1,55 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f4f6;
+  }
+  
+  .login-form {
+    padding: 25px;
+    border-radius: 15px; /* 중복된 border-radius 제거 */
+    width: 100%; /* 최대 크기 100% */
+    max-width: 350px; /* 최대 너비 설정 */
+    text-align: center;
+  }
+  
+  input[type='text'], input[type='email'], input[type='password'] {
+    width: 100%; /* 입력 필드가 폼 너비에 맞게 확장 */
+    padding: 13px;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .login-button {
+    width: 100%; /* 버튼이 폼 너비에 맞게 확장 */
+    padding: 13px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px; /* 버튼 모서리를 조금 더 둥글게 */
+    max-width: 280px;
+    background-color: #059761;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    opacity: 0.9;
+  }
+  
+  .toggle-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #778899;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .toggle-link:hover {
+    text-decoration: underline;
+  }
+  

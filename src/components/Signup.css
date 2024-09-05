@@ -1,0 +1,58 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f3f4f6;
+}
+
+.signup-form {
+  padding: 25px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 350px;
+  text-align: center;
+  margin-top: center;
+  border-radius: 15px;
+}
+
+input[type='text'], input[type='email'], input[type='password'] {
+  width: 100%;
+  padding: 13px;
+  margin-top: 6px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 280px;
+}
+
+.signup-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  max-width: 280px;
+  border: none;
+  border-radius: 4px;
+  background-color: #059761;
+  color: white;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  opacity: 0.9;
+}
+
+/* 새로 추가된 링크 스타일링 */
+.toggle-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #778899;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}
