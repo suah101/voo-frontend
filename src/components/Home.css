@@ -1,153 +1,138 @@
 /* 모든 엘리먼트 초기화 */
 * {
-  margin: 0; /* 기본 마진 제거 */
-  padding: 0; /* 기본 패딩 제거 */
-  box-sizing: border-box; /* 요소의 너비와 높이에 패딩과 테두리 포함 */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* 전체 컨테이너에 대한 기본 스타일 */
 .home-container {
-  font-family: 'Arial', sans-serif; /* 전체 폰트 설정 */
-  color: #333; /* 기본 텍스트 색상 설정 */
+  font-family: 'Arial', sans-serif;
+  color: #333;
 }
 
 /* 네비게이션 바 스타일링 */
 .navbar {
-  display: flex; /* 네비게이션 바를 플렉스 박스로 설정 */
-  justify-content: space-between; /* 로고와 링크를 양 끝으로 배치 */
-  align-items: center; /* 네비게이션 바 내의 아이템들을 세로로 중앙 정렬 */
-  padding: 20px 40px; /* 네비게이션 바의 안쪽 여백 설정 */
-  background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 아래쪽에 그림자를 주어 떠 있는 느낌을 추가 */
+  display: flex;
+  justify-content: space-between; /* 네비게이션 바 내 요소들을 양 끝에 배치 */
+  align-items: center; /* 세로 방향으로 중앙에 정렬 */
+  padding: 20px; /* 네비게이션 바에 20px의 여백 추가 */
+  width: 100%; /* 네비게이션 바가 화면 전체 너비를 사용하도록 설정 */
+  position: relative; /* 네비게이션 바의 위치를 다른 요소들에 상대적으로 설정 */
 }
 
-.navbar button{
-  background-color: #059761; /* 원하는 색상으로 변경 */
-  color: #fff; /* 버튼 텍스트 색상을 흰색으로 설정 */
-  border-radius: 5px; /* 버튼의 모서리를 둥글게 설정 */
-  padding: 10px 20px; /* 버튼의 내부 여백 설정 */
-}
-
-/* 로고 스타일링 */
+/* 로고 텍스트 스타일링 */
 .logo {
-  font-size: 28px; /* 로고 텍스트의 크기 설정 */
-  font-weight: bold; /* 로고 텍스트의 굵기를 두껍게 설정 */
-  color: #fff; /* 로고 텍스트의 색상을 파란색으로 설정 */
+  font-size: 35px; /* 로고의 글씨 크기 */
+  font-weight: bold; /* 로고 텍스트를 굵게 표시 */
+  color: #059761; /* 로고 텍스트 색상을 녹색으로 설정 */
 }
 
-/* 네비게이션 링크 스타일링 */
-.nav-links a {
-  margin: 0 15px; /* 링크 간의 간격 설정 */
-  text-decoration: none; /* 링크 밑줄 제거 */
-  color: #555; /* 링크 텍스트 색상 설정 */
-  font-size: 16px; /* 링크 텍스트 크기 설정 */
+/* 사용자 프로필 섹션 스타일링 */
+.homeprofile-section {
+  display: flex; /* 프로필 섹션 내 요소들을 가로로 배치 */
+  align-items: center; /* 세로 방향으로 중앙 정렬 */
+  gap: 10px; /* 아이콘과 사용자 ID 사이에 10px 간격 추가 */
+  margin-left: auto; /* 프로필 섹션을 네비게이션 바 오른쪽 끝에 정렬 */
+  cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
 }
 
-/* 네비게이션 링크 호버 스타일링 */
-.nav-links a:hover {
-  color: #19d27c; /* 링크에 마우스를 올렸을 때 색상 변경 */
+/* 사용자 이름 텍스트 스타일링 */
+.username {
+  font-weight: bold; /* 사용자 이름을 굵게 표시 */
+  color: #333; /* 사용자 이름의 색상을 진한 회색으로 설정 */
 }
 
-/* map 섹션의 스타일링 */
+/* 네비게이션 바 내 버튼 스타일링 */
+.navbar button {
+  background-color: #059761; /* 버튼 배경색을 녹색으로 설정 */
+  color: #fff; /* 버튼 텍스트 색상을 흰색으로 설정 */
+  border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
+  padding: 10px 20px; /* 버튼 내 텍스트와의 여백 설정 */
+}
+
+/* 네비게이션 바 버튼 호버 시 스타일링 */
+.navbar button:hover {
+  background-color: #047850; /* 버튼 위에 마우스를 올리면 배경색이 어두운 녹색으로 변경 */
+}
+
+/* 지도 섹션 스타일링 */
 .map-section {
-  display: flex; /* 섹션을 플렉스 박스로 설정 */
-  align-items: center; /* 섹션 내의 아이템들을 세로로 중앙 정렬 */
-  justify-content: space-between; /* 텍스트와 이미지를 양 끝으로 배치 */
-  padding: 60px 40px; /* 섹션의 안쪽 여백 설정 */
-  background-color: #f5f5f5; /* 배경색을 연회색으로 설정 */
+  display: flex; /* 지도 섹션을 가로로 배치 */
+  align-items: center; /* 세로 방향으로 중앙 정렬 */
+  justify-content: space-between; /* 지도 섹션의 텍스트와 이미지가 양 끝에 배치되도록 설정 */
+  padding: 60px 40px; /* 지도 섹션에 상하 60px, 좌우 40px 여백 추가 */
+  background-color: #f5f5f5; /* 배경색을 연한 회색으로 설정 */
 }
 
-/* map 섹션의 텍스트 부분 스타일링 */
+/* 지도 섹션 내 텍스트 부분 스타일링 */
 .map-text {
-  max-width: 50%; /* 텍스트가 차지하는 최대 너비를 전체의 50%로 설정 */
+  max-width: 50%; /* 텍스트 부분이 전체 섹션의 절반까지만 차지하도록 설정 */
 }
 
-/* get started button 스타일링 */
+/* 지도 섹션 내 텍스트 부분의 버튼 스타일링 */
 .map-text button {
-  background-color: #059761;
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px 20px;
+  background-color: #059761; /* 텍스트 버튼의 배경색을 녹색으로 설정 */
+  color: #fff; /* 버튼 텍스트를 흰색으로 설정 */
+  border-radius: 5px; /* 버튼 모서리를 5px 둥글게 설정 */
+  padding: 10px 20px; /* 버튼 내부 여백 설정 */
 }
 
-/* map 섹션의 제목 스타일링 */
+/* 지도 섹션의 제목 스타일링 */
 .map-text h1 {
-  font-size: 48px; /* 제목의 크기를 크게 설정 */
-  margin-bottom: 20px; /* 제목 아래쪽에 여백 추가 */
-  color: #059761; /* 제목 텍스트 색상을 녹색으로 설정 */
+  font-size: 48px; /* 제목의 글씨 크기를 48px로 설정 */
+  margin-bottom: 20px; /* 제목과 다음 요소 사이에 20px 간격 추가 */
+  color: #059761; /* 제목의 텍스트 색상을 녹색으로 설정 */
 }
 
-/* map 섹션의 문단 텍스트 스타일링 */
+/* 지도 섹션의 본문 텍스트 스타일링 */
 .map-text p {
-  font-size: 18px; /* 문단 텍스트의 크기 설정 */
-  margin-bottom: 30px; /* 문단 텍스트 아래쪽에 여백 추가 */
-  color: #333; /* 문단 텍스트 색상 설정 */
+  font-size: 18px; /* 본문 텍스트 크기를 18px로 설정 */
+  margin-bottom: 30px; /* 본문 텍스트와 다음 요소 사이에 30px 간격 추가 */
+  color: #333; /* 본문 텍스트 색상을 진한 회색으로 설정 */
 }
 
-/* map 섹션의 이미지 스타일링 */
+/* 지도 섹션의 이미지 스타일링 */
 .map-image {
-  max-width: 45%; /* 이미지가 차지하는 최대 너비를 전체의 45%로 설정 */
-  border-radius: 10px; /* 이미지의 모서리를 둥글게 설정 */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 이미지에 그림자를 주어 입체감을 추가 */
+  max-width: 45%; /* 이미지가 전체 섹션의 45%까지만 차지하도록 설정 */
+  border-radius: 10px; /* 이미지의 모서리를 10px 둥글게 설정 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 이미지에 그림자를 추가해 입체감을 부여 */
 }
 
-/* 기능 섹션 스타일링 */
-.features-section {
-  padding: 60px 40px; /* 섹션의 안쪽 여백 설정 */
-  text-align: center; /* 섹션 내의 텍스트를 중앙 정렬 */
-  color: #333333 ;
+/* 검색 섹션 스타일링 */
+.search-section {
+  display: flex; /* 검색 섹션을 가로로 배치 */
+  justify-content: center; /* 검색 섹션을 중앙 정렬 */
+  width: 100%; /* 검색 섹션이 전체 너비를 차지하도록 설정 */
+  margin-top: 20px; /* 검색 섹션 상단에 20px의 간격 추가 */
 }
 
-/* 기능 섹션의 제목 스타일링 */
-.features-section h2 {
-  font-size: 36px; /* 제목의 크기를 설정 */
-  margin-bottom: 40px; /* 제목 아래쪽에 여백 추가 */
-  color: #333333; /* 제목 텍스트 색상을 파란색으로 설정 */
+/* 검색 폼 스타일링 */
+.search-form {
+  display: flex; /* 검색 입력 필드와 검색 아이콘을 가로로 나란히 배치 */
+  justify-content: center; /* 검색 폼을 중앙에 정렬 */
+  align-items: center; /* 검색 입력 필드와 아이콘을 세로로 중앙에 정렬 */
+  width: 100%; /* 검색 폼의 너비를 100%로 설정 */
+  max-width: 800px; /* 검색 폼의 최대 너비를 800px로 제한 */
+  padding: 0 20px; /* 검색 폼 좌우 여백을 20px로 설정 */
 }
 
-/* 기능 섹션의 그리드 레이아웃 스타일링 */
-.features-grid {
-  display: flex; /* 그리드를 플렉스 박스로 설정 */
-  justify-content: space-around; /* 그리드 내의 아이템들을 균등하게 배치 */
-  flex-wrap: wrap; /* 그리드 내의 아이템들이 화면 크기에 따라 줄 바꿈 되도록 설정 */
+/* 검색 입력 필드 스타일링 */
+.search-input {
+  flex: 1; /* 검색 입력 필드가 남은 공간을 최대한 차지하도록 설정 */
+  padding: 15px; /* 검색 입력 필드 내부 여백 설정 */
+  font-size: 16px; /* 검색 입력 필드 텍스트 크기 설정 */
+  border: 1px solid #ccc; /* 검색 입력 필드의 테두리 색상을 연한 회색으로 설정 */
+  border-radius: 50px; /* 검색 입력 필드의 모서리를 둥글게 설정 */
+  outline: none; /* 포커스 시 테두리 윤곽선을 제거 */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* 검색 입력 필드에 약간의 그림자 추가 */
+  width: 100%; /* 검색 입력 필드의 너비를 100%로 설정 */
 }
 
-/* 각 기능 아이템의 스타일링 */
-.feature-item {
-  width: 30%; /* 각 아이템의 너비를 전체의 30%로 설정 */
-  margin-bottom: 30px; /* 각 아이템의 아래쪽에 여백 추가 */
-  color: #333333;
-}
-
-/* 기능 아이템의 아이콘 스타일링 */
-.feature-item i {
-  font-size: 48px; /* 아이콘 크기를 설정 */
-  color: #059761; /* 아이콘 색상을 파란색으로 설정 */
-  margin-bottom: 20px; /* 아이콘 아래쪽에 여백 추가 */
-}
-
-/* 기능 아이템의 제목 스타일링 */
-.feature-item h3 {
-  font-size: 24px; /* 제목의 크기 설정 */
-  margin-bottom: 10px; /* 제목 아래쪽에 여백 추가 */
-}
-
-/* 기능 아이템의 문단 텍스트 스타일링 */
-.feature-item p {
-  font-size: 16px; /* 문단 텍스트의 크기 설정 */
-  color: #555; /* 문단 텍스트 색상 설정 */
-}
-
-/* 푸터 스타일링 */
-.footer {
-  padding: 20px 40px; /* 푸터의 안쪽 여백 설정 */
-  background-color: #ffffff; /* 푸터 배경색을 흰색으로 설정 */
-  text-align: center; /* 푸터 내의 텍스트를 중앙 정렬 */
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 위쪽에 그림자를 주어 푸터를 떠 있는 느낌으로 추가 */
-}
-
-/* 푸터 텍스트 스타일링 */
-.footer p {
-  color: #777; /* 푸터 텍스트 색상 설정 */
-  font-size: 14px; /* 푸터 텍스트 크기 설정 */
+/* 검색 아이콘 버튼 스타일링 */
+.search-icon-button {
+  margin-left: -50px; /* 검색 아이콘을 검색창 오른쪽 끝에 위치시키기 위한 마진 설정 */
+  color: #333; /* 검색 아이콘의 색상을 진한 회색으로 설정 */
+  background-color: transparent; /* 검색 아이콘의 배경을 투명하게 설정 */
+  cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
 }

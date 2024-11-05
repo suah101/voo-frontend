@@ -1,142 +1,137 @@
 import React, { useState, useEffect } from 'react';
 import './Users.css';
+import { useNavigate } from 'react-router-dom';
+import CameraAltIcon from '@mui/icons-material/CameraAlt'; // 카메라 아이콘 가져오기
 
-// User 인터페이스는 사용자 정보의 형태를 정의합니다.
+// 게시물 인터페이스 정의
+interface Post {
+  description: string;  // 게시물 설명
+  images: string[];     // 이미지 배열
+  tags: string[];       // 태그 배열
+}
+
+// 사용자 인터페이스 정의
 interface User {
-  username: string; // 사용자 이름
-  bio: string; // 자기소개
-  profileImageUrl: string; // 프로필 이미지 URL
-  links: string[]; // 사용자 링크 목록
-  posts: string[]; // 사용자 게시물 목록
+  username: string;             // 사용자 이름
+  bio: string;                  // 자기소개
+  profileImageUrl: string;      // 프로필 이미지 URL
+  posts: Post[];                // 게시물 배열
 }
 
 const Users = () => {
-  // 사용자 상태를 정의합니다. 초기값을 설정합니다.
+  const navigate = useNavigate(); // useNavigate 훅 생성
   const [user, setUser] = useState<User>({
-    username: "예시",
+    username: "",
     bio: "자기소개를 여기에 적어주세요.",
-    profileImageUrl: "https://example.com/profile.jpg",
-    links: [],
+    profileImageUrl: "",
     posts: []
   });
 
-  // 새 링크를 추가할 때 사용할 상태입니다.
-  const [newLink, setNewLink] = useState('');
-  // 프로필 편집 모드 상태를 정의합니다.
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(false); // 프로필 편집 모드 상태
 
   useEffect(() => {
-    // 서버에서 게시물 데이터를 가져오는 함수입니다.
-    const fetchPosts = async () => {
-      try {
-        // 실제 API 엔드포인트로 교체해야 합니다.
-        const response = await fetch('/api/posts');
-        const data = await response.json();
-        // 기존 사용자 정보 상태를 업데이트하여 게시물 목록을 설정합니다.
-        setUser((prevUser) => ({ ...prevUser, posts: data.posts }));
-      } catch (error) {
-        console.error('게시물 불러오기 오류:', error);
-      }
-    };
+    // 로컬 스토리지에서 사용자 이름 가져오기
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUser((prevUser) => ({ ...prevUser, username: storedUsername })); // 사용자 이름 설정
+    }
 
-    fetchPosts();
-  }, []); // 빈 배열을 의존성 배열로 설정하여 컴포넌트가 처음 렌더링될 때만 호출됩니다.
+    // 로컬 스토리지에서 게시물 불러오기
+    const storedPosts = JSON.parse(localStorage.getItem('posts') || '[]');
+    setUser((prevUser) => ({ ...prevUser, posts: storedPosts })); // 게시물 설정
+  }, []);
 
-  // 새 링크를 추가하는 함수입니다.
-  const addLink = () => {
-    // 현재 사용자 정보 상태를 업데이트하여 새 링크를 추가합니다.
-    setUser({ ...user, links: [...user.links, newLink] });
-    setNewLink(''); // 입력 필드를 초기화합니다.
-  };
-
-  // 프로필 이미지 파일이 변경되었을 때 호출되는 함수입니다.
+  // 프로필 이미지 변경 핸들러
   const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // 읽어온 파일의 데이터를 URL로 변환하여 프로필 이미지 URL 상태를 업데이트합니다.
-        setUser({ ...user, profileImageUrl: reader.result as string });
+        setUser({ ...user, profileImageUrl: reader.result as string }); // 이미지 URL 설정
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // 파일을 URL로 읽기
     }
+  };
+
+  // 홈 버튼 클릭 핸들러
+  const handleHomeClick = () => {
+    navigate('/'); // 홈 화면으로 이동
   };
 
   return (
     <div className="user-profile-container">
+      <span onClick={handleHomeClick} className="home-link">VOO</span> {/* 홈으로 가기 링크 */}
       <div className="profile-section">
         <div className="profile-image-container">
-          <img src={user.profileImageUrl} alt="Profile" className="profile-image" />
-          {editMode && (
-            <div className="camera-icon">
+          <img
+            src={user.profileImageUrl || "/default-profile.png"} // 프로필 이미지 표시
+            alt="Profile"
+            className="profile-image"
+          />
+          {editMode && ( // 편집 모드일 때 이미지 변경 아이콘 표시
+            <div className="icon-container">
               <label htmlFor="file-upload">
-                <img src="camera-icon-url" alt="camera" className="camera-img" />
+                <CameraAltIcon className="camera-img" />
               </label>
               <input
                 id="file-upload"
                 type="file"
                 accept="image/*"
-                onChange={handleProfileImageChange}
-                style={{ display: 'none' }} // 파일 입력 필드를 숨깁니다.
+                onChange={handleProfileImageChange} // 이미지 변경 핸들러
+                style={{ display: 'none' }} // 파일 입력 숨기기
               />
             </div>
           )}
         </div>
-        <h2>{user.username}</h2>
-        <p>{user.bio}</p>
+        <h2>{user.username}</h2> {/* 사용자 이름 표시 */}
+        <p>{user.bio}</p> {/* 자기소개 표시 */}
 
-        {!editMode && (
-          <div className="links">
-            {user.links.map((link, index) => (
-              <a key={index} href={link} target="_blank" rel="noopener noreferrer">{link}</a>
-            ))}
-          </div>
-        )}
-
-        {editMode && (
+        {editMode && ( // 편집 모드일 때 자기소개 수정 입력란 표시
           <div className="edit-section">
             <input
               type="text"
               placeholder="자기소개 수정"
               value={user.bio}
-              onChange={(e) => setUser({ ...user, bio: e.target.value })}
+              onChange={(e) => setUser({ ...user, bio: e.target.value })} // 자기소개 상태 업데이트
               className="input-field"
             />
-            <div className="link-input-group">
-              <input
-                type="text"
-                placeholder="링크 추가"
-                value={newLink}
-                onChange={(e) => setNewLink(e.target.value)}
-                className="input-field"
-              />
-              <button className="link-button" onClick={addLink}>추가</button>
-            </div>
-
-            {/* 개인정보 수정과 저장 영역 */}
             <div className="divider"></div>
-            <p className="save-text" onClick={() => console.log('개인정보 수정')}>개인정보 수정</p>
-            <div className="divider"></div>
-            <p className="save-text" onClick={() => setEditMode(false)}>변경사항 저장</p>
+            <p className="save-text" onClick={() => setEditMode(false)}>변경사항 저장</p> {/* 변경사항 저장 */}
             <div className="divider"></div>
           </div>
         )}
 
-        {!editMode && (
+        {!editMode && ( // 편집 모드가 아닐 때 프로필 편집 버튼 표시
           <div className="button-group">
-            <button className="outline-button" onClick={() => setEditMode(true)}>프로필 편집</button>
+            <div className="divider"></div>
+            <p className="save-text" onClick={() => setEditMode(true)} style={{ cursor: 'pointer' }}>프로필 편집</p>
+            <div className="divider"></div>
           </div>
         )}
 
         <div className="posts">
-          <h3>내 게시물</h3>
-          {user.posts.length > 0 ? (
-            user.posts.map((post, index) => (
-              <p key={index}>{post}</p>
-            ))
-          ) : (
-            <p>게시물이 없습니다.</p>
-          )}
+          <h3>내 게시물</h3> {/* 게시물 제목 */}
+          <div className="posts-grid">
+            {user.posts.length > 0 ? ( // 게시물이 있을 경우
+              user.posts.map((post, index) => (
+                <div 
+                  key={index} 
+                  className="post-item" 
+                  onClick={() => {
+                    alert(`Description: ${post.description}\nTags: ${post.tags.join(', ')}`); // 게시물 설명 및 태그 표시
+                  }}
+                >
+                  <img
+                    src={post.images[0]} // 대표 사진만 표시
+                    alt={`post-${index}`}
+                    className="post-representative-image" // 대표 사진 스타일
+                  />
+                </div>
+              ))
+            ) : (
+              <p>게시물이 없습니다.</p> // 게시물이 없을 경우 메시지
+            )}
+          </div>
         </div>
       </div>
     </div>

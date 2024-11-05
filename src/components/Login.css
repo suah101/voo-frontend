@@ -1,55 +1,114 @@
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f3f4f6;
-  }
-  
-  .login-form {
-    padding: 25px;
-    border-radius: 15px; /* 중복된 border-radius 제거 */
-    width: 100%; /* 최대 크기 100% */
-    max-width: 350px; /* 최대 너비 설정 */
-    text-align: center;
-  }
-  
-  input[type='text'], input[type='email'], input[type='password'] {
-    width: 100%; /* 입력 필드가 폼 너비에 맞게 확장 */
-    padding: 13px;
-    margin-top: 6px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .login-button {
-    width: 100%; /* 버튼이 폼 너비에 맞게 확장 */
-    padding: 13px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px; /* 버튼 모서리를 조금 더 둥글게 */
-    max-width: 280px;
-    background-color: #059761;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .login-button:hover {
-    opacity: 0.9;
-  }
-  
-  .toggle-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #778899;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .toggle-link:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f3f4f6;
+}
+
+.login-form {
+  padding: 25px;
+  border-radius: 15px; /* 중복된 border-radius 제거 */
+  width: 100%; /* 최대 크기 100% */
+  max-width: 350px; /* 최대 너비 설정 */
+  text-align: center;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  width: 100%; /* 입력 필드가 폼 너비에 맞게 확장 */
+  padding: 13px;
+  margin-top: 6px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.login-button {
+  width: 100%; /* 버튼이 폼 너비에 맞게 확장 */
+  padding: 13px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px; /* 버튼 모서리를 조금 더 둥글게 */
+  max-width: 280px;
+  background-color: #059761;
+  color: white;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  opacity: 0.9;
+}
+
+.toggle-link {
+  display: block; /* 인라인 블록에서 블록으로 변경 */
+  margin-top: 10px;
+  font-size: 14px;
+  color: #778899;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}
+
+.toggle-link-password {
+  display: block; /* 인라인 블록에서 블록으로 변경 */
+  margin-top: 14px; /* 상단 마진 */
+  font-size: 14px; /* 글자 크기 */
+  color: #059761; /* 링크 글자 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  cursor: pointer; /* 마우스 커서 모양 변경 */
+}
+
+.toggle-link-password:hover {
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
+}
+
+.home-button {
+  position: absolute; /* 절대 위치 설정 */
+  top: 20px; /* 상단에서의 위치 */
+  left: 20px; /* 왼쪽에서의 위치 */
+  padding: 10px 15px;
+  background-color: #059761; /* 버튼 배경 색상 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+}
+
+.home-button:hover {
+  background-color: #047a54; /* 호버 시 배경 색상 변경 */
+}
+
+/* Login.css */
+
+/* 모달 배경 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 창 */
+.modal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+}

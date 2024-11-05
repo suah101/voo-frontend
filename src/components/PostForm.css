@@ -1,0 +1,101 @@
+/* 전체 컨테이너 */
+.post-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 헤더 */
+.post-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.post-form-header h2 {
+  text-align: center;
+}
+
+/* 홈 버튼 */
+.home-button {
+  background: #f0f0f0;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px; /* 둥근 모서리 적용 */
+}
+
+/* 입력 섹션 */
+.post-form-title,
+.post-form-content-textarea,
+.post-form-image-section {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.post-form-title {
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.post-form-content-textarea {
+  height: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  resize: none;
+}
+
+/* 이미지 업로드 섹션 */
+.post-form-image-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-upload-label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.image-upload-input {
+  display: block;
+}
+
+/* 버튼 섹션 */
+.post-form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.delete-button, .cancel-button, .save-button {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 15px; /* 각 버튼에 둥근 모서리 추가 */
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #e0e0e0;
+  color: black;
+}
+
+.save-button {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 15px;
+}
