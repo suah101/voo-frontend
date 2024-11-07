@@ -71,8 +71,7 @@ const Signup: React.FC = () => {
     <div className="signup-container">
       <button 
         onClick={() => navigate('/')}
-        className="home-button"
-      >
+        className="home-button">
         홈으로
       </button>
       <form onSubmit={handleSubmit} className="signup-form">

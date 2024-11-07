@@ -5,7 +5,7 @@ import './PostList.css';
 
 interface Post {
   id: number;
-  user_id: number;  // 추가된 필드
+  user_id: number;
   title: string;
   content: string;
   location_name?: string;
@@ -48,7 +48,7 @@ const PostList: React.FC = () => {
 
   const handleSelectPost = (post: Post) => {
     setSelectedPost(post);
-    setFormVisible(false);
+    setFormVisible(false); // 선택된 게시물이 있을 때 폼은 숨김
   };
 
   const handleDeletePost = async (postId: number) => {
@@ -67,26 +67,42 @@ const PostList: React.FC = () => {
   return (
     <div className="post-list">
       <h1>게시판</h1>
-      <button onClick={() => { setFormVisible(true); setSelectedPost(null); }}>새 게시물 작성</button>
-      {successMessage && <p>{successMessage}</p>}
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id} onClick={() => handleSelectPost(post)}>
-            <div>
-              <h3>{post.title}</h3>
-              <button onClick={(e) => { e.stopPropagation(); handleDeletePost(post.id); }}>삭제</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      {isFormVisible && (
-        <PostForm 
-          onPostSaved={fetchPosts} 
-          selectedPost={selectedPost} 
-          onClose={() => setFormVisible(false)} 
+
+      {/* 상세 화면 전환 */}
+      {selectedPost ? (
+        <PostDetail 
+          post={selectedPost} 
+          onClose={() => setSelectedPost(null)} // 목록으로 돌아가기
         />
+      ) : (
+        <>
+          {isFormVisible ? (
+            <PostForm 
+              onPostSaved={async () => {
+                await fetchPosts();
+                setFormVisible(false); // 폼 저장 후 목록으로 돌아가기
+              }} 
+              selectedPost={selectedPost} 
+              onClose={() => setFormVisible(false)} 
+            />
+          ) : (
+            <>
+              <button onClick={() => { setFormVisible(true); setSelectedPost(null); }}>새 게시물 작성</button>
+              {successMessage && <p>{successMessage}</p>}
+              <ul>
+                {posts.map((post) => (
+                  <li key={post.id} onClick={() => handleSelectPost(post)}>
+                    <div>
+                      <h3>{post.title}</h3>
+                      <button onClick={(e) => { e.stopPropagation(); handleDeletePost(post.id); }}>삭제</button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </>
       )}
-      {selectedPost && <PostDetail post={selectedPost} onClose={() => setSelectedPost(null)} />}
     </div>
   );
 };

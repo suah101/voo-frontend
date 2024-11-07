@@ -1,5 +1,3 @@
-// PostForm.tsx
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PostForm.css';
@@ -14,10 +12,9 @@ const PostForm: React.FC<PostFormProps> = ({ onPostSaved, selectedPost, onClose 
   const [title, setTitle] = useState(selectedPost ? selectedPost.title : '');
   const [content, setContent] = useState(selectedPost ? selectedPost.content : '');
   const [image, setImage] = useState<File | null>(null);
-  const [travelDate, setTravelDate] = useState(''); // 날짜 상태 추가
+  const [travelDate, setTravelDate] = useState('');
   const navigate = useNavigate();
 
-  // 더미 위치 데이터
   const [location_name] = useState('San Francisco');
   const [latitude] = useState(37.7749);
   const [longitude] = useState(-122.4194);
@@ -34,9 +31,8 @@ const PostForm: React.FC<PostFormProps> = ({ onPostSaved, selectedPost, onClose 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const postData = {
-      user_id: 1, // 임시 사용자 ID
+      user_id: 1,
       title,
       content,
       location_name,
