@@ -4,7 +4,7 @@ import PostForm from './PostForm';
 import './PostList.css';
 
 interface Post {
-  id: number;
+  record_id: number;
   user_id: number;
   title: string;
   content: string;
@@ -20,14 +20,14 @@ const PostList: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [isFormVisible, setFormVisible] = useState(false);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [isSuccessModalVisible, setSuccessModalVisible] = useState(false); // 삭제 완료 모달 상태
+  const [postToDelete, setPostToDelete] = useState<number | null>(null);
 
   const fetchPosts = async () => {
     try {
-      console.log("Fetching posts from server...");
       const response = await fetch('http://localhost:3000/api/travel-records');
       const data = await response.json();
-      console.log("Fetched data:", data);
       setPosts(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -39,28 +39,29 @@ const PostList: React.FC = () => {
     fetchPosts();
   }, []);
 
-  useEffect(() => {
-    if (successMessage) {
-      const timer = setTimeout(() => setSuccessMessage(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [successMessage]);
-
   const handleSelectPost = (post: Post) => {
     setSelectedPost(post);
-    setFormVisible(false); // 선택된 게시물이 있을 때 폼은 숨김
+    setFormVisible(false);
   };
 
-  const handleDeletePost = async (postId: number) => {
+  const confirmDeletePost = (record_id: number) => {
+    setDeleteModalVisible(true);
+    setPostToDelete(record_id);
+  };
+
+  const handleDeletePost = async () => {
+    if (postToDelete === null) return;
     try {
-      await fetch(`http://localhost:3000/api/travel-records/${postId}`, {
+      await fetch(`http://localhost:3000/api/travel-records/${postToDelete}`, {
         method: 'DELETE',
       });
-      setPosts((prevPosts) => prevPosts.filter(post => post.id !== postId));
-      setSuccessMessage('게시물이 삭제되었습니다!');
+      setPosts((prevPosts) => prevPosts.filter(post => post.record_id !== postToDelete));
+      setSuccessModalVisible(true); // 삭제 완료 모달 표시
     } catch (error) {
       console.error("Error deleting post:", error);
-      setSuccessMessage('게시물 삭제에 실패했습니다.');
+    } finally {
+      setDeleteModalVisible(false);
+      setPostToDelete(null);
     }
   };
 
@@ -68,11 +69,10 @@ const PostList: React.FC = () => {
     <div className="post-list">
       <h1>게시판</h1>
 
-      {/* 상세 화면 전환 */}
       {selectedPost ? (
         <PostDetail 
           post={selectedPost} 
-          onClose={() => setSelectedPost(null)} // 목록으로 돌아가기
+          onClose={() => setSelectedPost(null)}
         />
       ) : (
         <>
@@ -80,7 +80,7 @@ const PostList: React.FC = () => {
             <PostForm 
               onPostSaved={async () => {
                 await fetchPosts();
-                setFormVisible(false); // 폼 저장 후 목록으로 돌아가기
+                setFormVisible(false);
               }} 
               selectedPost={selectedPost} 
               onClose={() => setFormVisible(false)} 
@@ -88,17 +88,42 @@ const PostList: React.FC = () => {
           ) : (
             <>
               <button onClick={() => { setFormVisible(true); setSelectedPost(null); }}>새 게시물 작성</button>
-              {successMessage && <p>{successMessage}</p>}
               <ul>
                 {posts.map((post) => (
-                  <li key={post.id} onClick={() => handleSelectPost(post)}>
+                  <li key={post.record_id} onClick={() => handleSelectPost(post)}>
                     <div>
                       <h3>{post.title}</h3>
-                      <button onClick={(e) => { e.stopPropagation(); handleDeletePost(post.id); }}>삭제</button>
+                      <button onClick={(e) => { 
+                        e.stopPropagation(); 
+                        confirmDeletePost(post.record_id); // 삭제 확인 모달 열기
+                      }}>삭제</button>
                     </div>
                   </li>
                 ))}
               </ul>
+
+              {/* 삭제 확인 모달 */}
+              {isDeleteModalVisible && (
+                <div className="delete-modal">
+                  <div className="modal-content">
+                    <p>게시물을 삭제하시겠습니까?</p>
+                    <div className="modal-buttons">
+                      <button onClick={() => setDeleteModalVisible(false)} className="cancel-button">취소</button>
+                      <button onClick={handleDeletePost} className="confirm-button">확인</button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 삭제 완료 모달 */}
+              {isSuccessModalVisible && (
+                <div className="success-modal">
+                  <div className="modal-content">
+                    <p>게시물이 삭제되었습니다!</p>
+                    <button onClick={() => setSuccessModalVisible(false)} className="confirm-button">확인</button>
+                  </div>
+                </div>
+              )}
             </>
           )}
         </>

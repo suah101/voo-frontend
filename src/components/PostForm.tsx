@@ -13,11 +13,17 @@ const PostForm: React.FC<PostFormProps> = ({ onPostSaved, selectedPost, onClose 
   const [content, setContent] = useState(selectedPost ? selectedPost.content : '');
   const [image, setImage] = useState<File | null>(null);
   const [travelDate, setTravelDate] = useState('');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]); // 선택된 태그 상태
   const navigate = useNavigate();
 
   const [location_name] = useState('San Francisco');
   const [latitude] = useState(37.7749);
   const [longitude] = useState(-122.4194);
+
+  // 태그 목록을 배열로 정의
+  const tagOptions = [
+    '해변', '산', '도시', '섬', '하이킹', '캠핑', '가족', '친구', '여름', '가을', '럭셔리', '배낭 여행'
+  ];
 
   useEffect(() => {
     if (selectedPost) {
@@ -29,6 +35,13 @@ const PostForm: React.FC<PostFormProps> = ({ onPostSaved, selectedPost, onClose 
     }
   }, [selectedPost]);
 
+  const handleTagChange = (tag: string) => {
+    // 태그 선택/해제 로직
+    setSelectedTags((prevTags) =>
+      prevTags.includes(tag) ? prevTags.filter((t) => t !== tag) : [...prevTags, tag]
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const postData = {
@@ -39,6 +52,7 @@ const PostForm: React.FC<PostFormProps> = ({ onPostSaved, selectedPost, onClose 
       latitude,
       longitude,
       travel_date: travelDate,
+      tags: selectedTags, // 선택된 태그 포함
     };
 
     try {
@@ -110,6 +124,25 @@ const PostForm: React.FC<PostFormProps> = ({ onPostSaved, selectedPost, onClose 
             required
           />
         </div>
+
+        {/* 태그 선택 섹션 추가 */}
+        <div className="post-form-tag-section">
+          <label className="tag-label">태그 선택</label>
+          <div className="tag-options">
+            {tagOptions.map((tag) => (
+              <label key={tag} className="tag-option">
+                <input
+                  type="checkbox"
+                  value={tag}
+                  checked={selectedTags.includes(tag)}
+                  onChange={() => handleTagChange(tag)}
+                />
+                {tag}
+              </label>
+            ))}
+          </div>
+        </div>
+
         <div className="post-form-buttons">
           <button type="button" onClick={handleCancel} className="cancel-button">취소</button>
           <button type="submit" className="save-button">저장</button>
